@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Windows\Forms\Button.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\CheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\ComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\DataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\Label.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\ListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\Panel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Windows\Forms\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
