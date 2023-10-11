@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
 
@@ -19,14 +21,17 @@ public class DatabaseContext : DbContext
 	protected override void OnConfiguring
 		(DbContextOptionsBuilder optionsBuilder)
 
-	{
+    {
+        var dbPath =Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"database.db");
+        var sqliteConnectionString = $"Data Source={dbPath};";
         var connectionString =
  
         "Server=.;Database=PhoneBook ;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;";
 
-        optionsBuilder.UseSqlServer
-			(connectionString: connectionString);
-	}
+        //optionsBuilder.UseSqlServer
+		//	(connectionString: connectionString);
+        optionsBuilder.UseSqlite(sqliteConnectionString);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

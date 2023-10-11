@@ -62,13 +62,15 @@ public partial class MainForm : System.Windows.Forms.Form
     {
         if (MynewContact == null || MynewContact.IsDisposed)
         {
-            MynewContact = new NewContact
+            MynewContact = new NewContact(this)
             {
                 MdiParent = this,
             };
         }
 
+
         MynewContact.Show();
+
 
     }
 
@@ -76,12 +78,16 @@ public partial class MainForm : System.Windows.Forms.Form
     {
         if (MynewContact == null || MynewContact.IsDisposed)
         {
-            MynewContact = new NewContact
+            MynewContact = new NewContact(this)
             {
                 MdiParent = this,
+                
             };
         }
         MynewContact.Show();
+        MynewContact.BringToFront();
+        MynewContact.TopMost = true;
+        phoneBookDataGridView.SendToBack();
     }
 
     private void searchContactToolStripMenuItem_Click(object sender, EventArgs e)

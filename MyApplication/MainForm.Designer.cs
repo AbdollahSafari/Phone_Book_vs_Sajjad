@@ -69,26 +69,26 @@
             // newContactToolStripMenuItem
             // 
             newContactToolStripMenuItem.Name = "newContactToolStripMenuItem";
-            newContactToolStripMenuItem.Size = new Size(154, 22);
+            newContactToolStripMenuItem.Size = new Size(180, 22);
             newContactToolStripMenuItem.Text = "&New Contact";
             newContactToolStripMenuItem.Click += newContactToolStripMenuItem_Click;
             // 
             // searchContactToolStripMenuItem
             // 
             searchContactToolStripMenuItem.Name = "searchContactToolStripMenuItem";
-            searchContactToolStripMenuItem.Size = new Size(154, 22);
+            searchContactToolStripMenuItem.Size = new Size(180, 22);
             searchContactToolStripMenuItem.Text = "&Search Contact";
             searchContactToolStripMenuItem.Click += searchContactToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(151, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(154, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "&Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -102,14 +102,14 @@
             // refreshToolStripMenuItem
             // 
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            refreshToolStripMenuItem.Size = new Size(113, 22);
+            refreshToolStripMenuItem.Size = new Size(180, 22);
             refreshToolStripMenuItem.Text = "&Refresh";
             refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(110, 6);
+            toolStripSeparator2.Size = new Size(177, 6);
             // 
             // helpToolStripMenuItem
             // 
@@ -203,18 +203,17 @@
             // MainForm
             // 
             AcceptButton = searchContactButton;
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImageLayout = ImageLayout.Stretch;
             CancelButton = exitButton;
             ClientSize = new Size(807, 511);
             Controls.Add(dateTimePicker2);
-            Controls.Add(phoneBookDataGridView);
             Controls.Add(exitButton);
             Controls.Add(dateTimePicker1);
             Controls.Add(newContactButton);
             Controls.Add(searchContactButton);
             Controls.Add(menuStrip1);
+            Controls.Add(phoneBookDataGridView);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             MaximumSize = new Size(1200, 550);

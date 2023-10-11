@@ -14,11 +14,13 @@ namespace MyApplication;
 
 public partial class NewContact : System.Windows.Forms.Form
 {
-    private MainForm mainForm;
-    public NewContact() : base()
+    private MainForm _mainForm;
+    public NewContact(MainForm form) : base()
     {
+        _mainForm = form;
         InitializeComponent();
-        mainForm = new MainForm();
+        this.BringToFront();
+        this.UpdateZOrder();
     }
 
     private void resetButton_Click(object sender, EventArgs e)
@@ -141,7 +143,7 @@ public partial class NewContact : System.Windows.Forms.Form
             databaseContext.Add(entity: newUser);
             databaseContext.SaveChanges();
             MessageBox.Show(text: "مخاطب اضافه گردید");
-            mainForm.RefreshContactDataGrid();
+            _mainForm.RefreshContactDataGrid();
             Close();
 
         }
