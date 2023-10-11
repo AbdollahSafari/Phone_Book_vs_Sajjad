@@ -13,12 +13,15 @@ namespace MyApplication;
 
 public partial class MainForm : System.Windows.Forms.Form
 {
+    public static MainForm? ActiveInstance { get; private set; }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public MainForm() : base()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     {
         InitializeComponent();
+        ActiveInstance = this;
+        
     }
 
     private void exitButton_Click(object sender, EventArgs e)
@@ -103,6 +106,23 @@ public partial class MainForm : System.Windows.Forms.Form
         MysearchContact.Show();
     }
 
+    public void EditContact(User user)
+    {
+        var editForm=new EditContactForm()
+            {SelectedContact = user};
+        editForm.Closed += EditForm_Closed;
+        editForm.MdiParent = this;
+        editForm.Show();
+    }
+
+    private void EditForm_Closed(object? sender, EventArgs e)
+    {
+        if (sender is EditContactForm editForm && editForm.IsSuccess)
+        {
+            RefreshContactDataGrid();
+        }
+    }
+
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
         Application.Exit();
@@ -111,18 +131,21 @@ public partial class MainForm : System.Windows.Forms.Form
     private ContactInformationForm? MYContactInformationForm { set; get; }
     private void phoneBookDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
-        var selectedUser =
-            phoneBookDataGridView.Rows[e.RowIndex].DataBoundItem as User;
-
-        if (selectedUser != null)
+        if (e.RowIndex > 0)
         {
-            var contactInformationForm = new ContactInformationForm()
-            {
-                SelectedUser = selectedUser,
-                MdiParent = this,
-            };
+            var selectedUser =
+                phoneBookDataGridView.Rows[e.RowIndex].DataBoundItem as User;
 
-            contactInformationForm.Show();
+            if (selectedUser != null)
+            {
+                var contactInformationForm = new ContactInformationForm(this)
+                {
+                    SelectedUser = selectedUser,
+                    MdiParent = this,
+                };
+
+                contactInformationForm.Show();
+            }
         }
     }
 

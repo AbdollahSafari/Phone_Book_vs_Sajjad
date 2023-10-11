@@ -13,11 +13,11 @@ namespace MyApplication;
 public partial class ContactInformationForm : Infrastructure.BaseForm
 {
     public Domain.User? SelectedUser { get; set; }
-    private MainForm mainForm;
-    public ContactInformationForm()
+    private MainForm _mainForm;
+    public ContactInformationForm(MainForm  mainForm)
     {
+        _mainForm=mainForm;
         InitializeComponent();
-        mainForm = new MainForm();
     }
 
 
@@ -38,14 +38,7 @@ public partial class ContactInformationForm : Infrastructure.BaseForm
     private EditContactForm? MyEditeContactForm { get; set; }
     private void editButton_Click(object sender, EventArgs e)
     {
-        if (MyEditeContactForm == null || MyEditeContactForm.IsDisposed)
-        {
-            MyEditeContactForm = new EditContactForm
-            {
-                SelectedContact = SelectedUser,
-            };
-        }
-        MyEditeContactForm.Show();
         Close();
+        _mainForm.EditContact(SelectedUser);
     }
 }

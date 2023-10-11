@@ -13,7 +13,7 @@ namespace MyApplication;
 
 public partial class EditContactForm : Infrastructure.BaseForm
 {
-    public EditContactForm()
+    public EditContactForm()    
     {
         InitializeComponent();
     }
@@ -29,11 +29,12 @@ public partial class EditContactForm : Infrastructure.BaseForm
         officePhoneTextBox.Text = SelectedContact.OfficePhone;
         mobilePhoneTextBox.Text = SelectedContact.MobilePhone;
     }
-
+    public bool IsSuccess { get; private set; }
     private void saveButton_Click(object sender, EventArgs e)
     {
         try
         {
+            IsSuccess = false;
             databaseContext = new Persistence.DatabaseContext();
             var foundedUser = databaseContext.Users.Where(c => c.Id == SelectedContact.Id).FirstOrDefault();
             if (foundedUser == null)
@@ -117,7 +118,7 @@ public partial class EditContactForm : Infrastructure.BaseForm
             databaseContext.SaveChanges();
 
             MessageBox.Show(text: "تغییرات با موفقیت اعمال شد");
-
+            IsSuccess = true;
             Close();
 
         }

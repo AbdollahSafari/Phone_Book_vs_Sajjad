@@ -110,7 +110,7 @@ public partial class SearchContact : Infrastructure.BaseForm
 
         if (selectedUser != null)
         {
-            var contactInformationForm = new ContactInformationForm()
+            var contactInformationForm = new ContactInformationForm(MainForm.ActiveInstance)
             {
                 SelectedUser = selectedUser,
             };
