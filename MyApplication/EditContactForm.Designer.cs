@@ -40,7 +40,6 @@
             positionTextBox = new Dtat.Windows.Forms.TextBox();
             officePhoneTextBox = new Dtat.Windows.Forms.TextBox();
             mobilePhoneTextBox = new Dtat.Windows.Forms.TextBox();
-            deleteContactButton = new Dtat.Windows.Forms.Button();
             SuspendLayout();
             // 
             // nameLabel
@@ -94,7 +93,7 @@
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(75, 23);
             closeButton.TabIndex = 12;
-            closeButton.Text = "&Close";
+            closeButton.Text = "&Cancel";
             closeButton.UseVisualStyleBackColor = true;
             closeButton.Click += closeButton_Click;
             // 
@@ -148,16 +147,6 @@
             mobilePhoneTextBox.Size = new Size(237, 23);
             mobilePhoneTextBox.TabIndex = 9;
             // 
-            // deleteContactButton
-            // 
-            deleteContactButton.Location = new Point(175, 150);
-            deleteContactButton.Name = "deleteContactButton";
-            deleteContactButton.Size = new Size(75, 23);
-            deleteContactButton.TabIndex = 11;
-            deleteContactButton.Text = "&Delete";
-            deleteContactButton.UseVisualStyleBackColor = true;
-            deleteContactButton.Click += deleteContactButton_Click;
-            // 
             // EditContactForm
             // 
             AcceptButton = saveButton;
@@ -165,7 +154,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
             ClientSize = new Size(336, 177);
-            Controls.Add(deleteContactButton);
             Controls.Add(mobilePhoneTextBox);
             Controls.Add(officePhoneTextBox);
             Controls.Add(positionTextBox);
@@ -201,6 +189,5 @@
         private Dtat.Windows.Forms.TextBox positionTextBox;
         private Dtat.Windows.Forms.TextBox officePhoneTextBox;
         private Dtat.Windows.Forms.TextBox mobilePhoneTextBox;
-        private Dtat.Windows.Forms.Button deleteContactButton;
     }
 }

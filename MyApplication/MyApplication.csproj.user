@@ -16,6 +16,9 @@
     <Compile Update="NewContact.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="OfficePhoneClass.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="SearchContact.cs">
       <SubType>Form</SubType>
     </Compile>

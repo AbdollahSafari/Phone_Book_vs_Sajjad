@@ -77,7 +77,9 @@
             // 
             mobilePhoneTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             mobilePhoneTextBox.Location = new Point(99, 122);
+            mobilePhoneTextBox.MaxLength = 11;
             mobilePhoneTextBox.Name = "mobilePhoneTextBox";
+            mobilePhoneTextBox.PlaceholderText = "09121234567";
             mobilePhoneTextBox.Size = new Size(237, 23);
             mobilePhoneTextBox.TabIndex = 9;
             // 
@@ -85,7 +87,9 @@
             // 
             officePhoneTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             officePhoneTextBox.Location = new Point(99, 93);
+            officePhoneTextBox.MaxLength = 11;
             officePhoneTextBox.Name = "officePhoneTextBox";
+            officePhoneTextBox.PlaceholderText = "12345";
             officePhoneTextBox.Size = new Size(237, 23);
             officePhoneTextBox.TabIndex = 7;
             // 
@@ -93,6 +97,7 @@
             // 
             administrativePositionTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             administrativePositionTextBox.Location = new Point(99, 64);
+            administrativePositionTextBox.MaxLength = 40;
             administrativePositionTextBox.Name = "administrativePositionTextBox";
             administrativePositionTextBox.Size = new Size(237, 23);
             administrativePositionTextBox.TabIndex = 5;
@@ -101,6 +106,7 @@
             // 
             familyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             familyTextBox.Location = new Point(99, 35);
+            familyTextBox.MaxLength = 60;
             familyTextBox.Name = "familyTextBox";
             familyTextBox.Size = new Size(237, 23);
             familyTextBox.TabIndex = 3;
@@ -109,6 +115,7 @@
             // 
             nameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             nameTextBox.Location = new Point(99, 6);
+            nameTextBox.MaxLength = 40;
             nameTextBox.Name = "nameTextBox";
             nameTextBox.Size = new Size(237, 23);
             nameTextBox.TabIndex = 1;

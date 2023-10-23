@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,32 +12,38 @@ using Domain;
 
 namespace MyApplication;
 
-public partial class EditContactForm : Infrastructure.BaseForm
+public partial class EditContactForm : System.Windows.Forms.Form
 {
-    public EditContactForm()    
+    private ContactInformationForm _contactInformationForm;
+    public EditContactForm(ContactInformationForm contactInformationForm) : base()
     {
+
         InitializeComponent();
+        _contactInformationForm = contactInformationForm;
     }
-    public Domain.User? SelectedContact { get; set; }
+
+
+    public User? EditContactSelectedContact { get; set; }
+    public bool IsSuccess { get; internal set; }
 
     Persistence.DatabaseContext? databaseContext = null;
 
     private void EditContactForm_Load(object sender, EventArgs e)
     {
-        nameTextBox.Text = SelectedContact.Name;
-        lastNameTextBox.Text = SelectedContact.LastName;
-        positionTextBox.Text = SelectedContact.Position;
-        officePhoneTextBox.Text = SelectedContact.OfficePhone;
-        mobilePhoneTextBox.Text = SelectedContact.MobilePhone;
+        nameTextBox.Text = EditContactSelectedContact.Name;
+        lastNameTextBox.Text = EditContactSelectedContact.LastName;
+        positionTextBox.Text = EditContactSelectedContact.Position;
+        officePhoneTextBox.Text = EditContactSelectedContact.OfficePhone;
+        mobilePhoneTextBox.Text = EditContactSelectedContact.MobilePhone;
     }
-    public bool IsSuccess { get; private set; }
+
     private void saveButton_Click(object sender, EventArgs e)
     {
+        Persistence.DatabaseContext? databaseContext = null;
         try
         {
-            IsSuccess = false;
             databaseContext = new Persistence.DatabaseContext();
-            var foundedUser = databaseContext.Users.Where(c => c.Id == SelectedContact.Id).FirstOrDefault();
+            var foundedUser = databaseContext.Users.Where(c => c.Id == EditContactSelectedContact.Id).FirstOrDefault();
             if (foundedUser == null)
             {
                 Close();
@@ -110,17 +117,22 @@ public partial class EditContactForm : Infrastructure.BaseForm
 
             if (errorMessages != string.Empty)
             {
-                    MessageBox.Show(text: errorMessages);
+                MessageBox.Show(text: errorMessages);
 
                 return;
             }
 
+            databaseContext =
+               new Persistence.DatabaseContext();
+            databaseContext.Update(entity: foundedUser);
             databaseContext.SaveChanges();
 
             MessageBox.Show(text: "تغییرات با موفقیت اعمال شد");
-            IsSuccess = true;
+            _contactInformationForm.ContactInformationSelectedUser = foundedUser;
+            _contactInformationForm.LoadContactInformation();
+            _contactInformationForm.RefreshContactInformation();
+            this.Dispose();
             Close();
-
         }
         catch (Exception ex)
         {
@@ -131,49 +143,11 @@ public partial class EditContactForm : Infrastructure.BaseForm
             databaseContext?.Dispose();
             databaseContext = null;
         }
-    }
-
-    private void deleteContactButton_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            databaseContext = new Persistence.DatabaseContext();
-            var foundedUser = databaseContext.Users.Where(c => c.Id == SelectedContact.Id).FirstOrDefault();
-            var dialogResult = MessageBox.Show(
-            defaultButton: MessageBoxDefaultButton.Button2,
-            text: "آیا از حذف مخاطب اطمینان دارید؟",
-            buttons: MessageBoxButtons.YesNo,
-            caption: "حذف مخاطب",
-            icon: MessageBoxIcon.Question
-            );
-
-            if (dialogResult == DialogResult.Yes)
-            {
-                databaseContext.Remove(foundedUser);
-
-                databaseContext.SaveChanges();
-                
-                Close();
-
-            }
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Error: {ex.Message}");
-        }
-
-        finally
-        {
-            databaseContext?.Dispose();
-            databaseContext = null;
-        }
-
-        
     }
 
     private void closeButton_Click(object sender, EventArgs e)
     {
+        this.Dispose();
         Close();
     }
 }

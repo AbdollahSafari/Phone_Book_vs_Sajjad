@@ -40,6 +40,7 @@
             contactPositionTextBlock = new Dtat.Windows.Forms.Label();
             contactOfficePhoneTextBlock = new Dtat.Windows.Forms.Label();
             contactMobilePhoneTextBlock = new Dtat.Windows.Forms.Label();
+            deleteContactButton = new Dtat.Windows.Forms.Button();
             SuspendLayout();
             // 
             // nameLabel
@@ -89,7 +90,7 @@
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(182, 150);
+            closeButton.Location = new Point(174, 150);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(75, 23);
             closeButton.TabIndex = 11;
@@ -157,11 +158,22 @@
             contactMobilePhoneTextBlock.TabIndex = 16;
             contactMobilePhoneTextBlock.Text = "label5";
             // 
+            // deleteContactButton
+            // 
+            deleteContactButton.Location = new Point(93, 150);
+            deleteContactButton.Name = "deleteContactButton";
+            deleteContactButton.Size = new Size(75, 23);
+            deleteContactButton.TabIndex = 17;
+            deleteContactButton.Text = "&Delete";
+            deleteContactButton.UseVisualStyleBackColor = true;
+            deleteContactButton.Click += deleteContactButton_Click;
+            // 
             // ContactInformationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(269, 177);
+            Controls.Add(deleteContactButton);
             Controls.Add(contactMobilePhoneTextBlock);
             Controls.Add(contactOfficePhoneTextBlock);
             Controls.Add(contactPositionTextBlock);
@@ -197,5 +209,6 @@
         private Dtat.Windows.Forms.Label contactPositionTextBlock;
         private Dtat.Windows.Forms.Label contactOfficePhoneTextBlock;
         private Dtat.Windows.Forms.Label contactMobilePhoneTextBlock;
+        private Dtat.Windows.Forms.Button deleteContactButton;
     }
 }

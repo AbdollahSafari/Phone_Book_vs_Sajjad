@@ -48,12 +48,12 @@
             // 
             // searchDataGridView
             // 
-            searchDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             searchDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             searchDataGridView.Location = new Point(12, 35);
             searchDataGridView.Name = "searchDataGridView";
+            searchDataGridView.RowHeadersVisible = false;
             searchDataGridView.RowTemplate.Height = 25;
-            searchDataGridView.Size = new Size(461, 232);
+            searchDataGridView.Size = new Size(345, 232);
             searchDataGridView.TabIndex = 2;
             searchDataGridView.CellDoubleClick += searchDataGridView_CellDoubleClick;
             // 
@@ -62,21 +62,22 @@
             searchByFamilyLabel.AutoSize = true;
             searchByFamilyLabel.Location = new Point(12, 9);
             searchByFamilyLabel.Name = "searchByFamilyLabel";
-            searchByFamilyLabel.Size = new Size(96, 15);
+            searchByFamilyLabel.Size = new Size(45, 15);
             searchByFamilyLabel.TabIndex = 0;
-            searchByFamilyLabel.Text = "&Search By Family";
+            searchByFamilyLabel.Text = "&Search ";
             // 
             // searchByFamilyTextBox
             // 
-            searchByFamilyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            searchByFamilyTextBox.Location = new Point(114, 6);
+            searchByFamilyTextBox.Location = new Point(63, 6);
+            searchByFamilyTextBox.MaxLength = 11;
             searchByFamilyTextBox.Name = "searchByFamilyTextBox";
-            searchByFamilyTextBox.Size = new Size(359, 23);
+            searchByFamilyTextBox.PlaceholderText = "Search By Name Or LastName";
+            searchByFamilyTextBox.Size = new Size(294, 23);
             searchByFamilyTextBox.TabIndex = 1;
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(398, 273);
+            closeButton.Location = new Point(232, 273);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(75, 23);
             closeButton.TabIndex = 4;
@@ -90,14 +91,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(485, 308);
+            ClientSize = new Size(361, 308);
             Controls.Add(closeButton);
             Controls.Add(searchByFamilyTextBox);
             Controls.Add(searchByFamilyLabel);
             Controls.Add(searchButton);
             Controls.Add(searchDataGridView);
             MaximumSize = new Size(800, 347);
-            MinimumSize = new Size(501, 347);
+            MinimumSize = new Size(377, 347);
             Name = "SearchContact";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Search Contact";

@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyApplication;
 
 public partial class MainForm : System.Windows.Forms.Form
 {
     public static MainForm? ActiveInstance { get; private set; }
+    private System.Threading.Timer _timer;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public MainForm() : base()
@@ -21,7 +23,7 @@ public partial class MainForm : System.Windows.Forms.Form
     {
         InitializeComponent();
         ActiveInstance = this;
-        
+
     }
 
     private void exitButton_Click(object sender, EventArgs e)
@@ -34,13 +36,18 @@ public partial class MainForm : System.Windows.Forms.Form
     private void MainForm_Load(object sender, EventArgs e)
     {
         RefreshContactDataGrid();
+        System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+        timer1.Interval = (1 * 1000);
+        timer1.Tick += new EventHandler(timer1_Tick);
+        timer1.Start();
+
     }
 
-    public void RefreshContactDataGrid()
+    public async void RefreshContactDataGrid()
     {
         Persistence.DatabaseContext? databaseContext = null;
         databaseContext = new Persistence.DatabaseContext();
-        users = databaseContext.Users.ToList();
+        users = await databaseContext.Users.ToListAsync();
         phoneBookDataGridView.DataSource = users;
     }
 
@@ -50,15 +57,16 @@ public partial class MainForm : System.Windows.Forms.Form
     {
         if (MysearchContact == null || MysearchContact.IsDisposed)
         {
-            MysearchContact = new SearchContact
+            MysearchContact = new SearchContact(this)
             {
-                MdiParent = this,
+
             };
         }
 
-        MysearchContact.Show();
+        MysearchContact.ShowDialog();
 
     }
+
     private NewContact? MynewContact { get; set; }
 
     private void newContactButton_Click(object sender, EventArgs e)
@@ -67,90 +75,40 @@ public partial class MainForm : System.Windows.Forms.Form
         {
             MynewContact = new NewContact(this)
             {
-                MdiParent = this,
+
             };
         }
-
-
-        MynewContact.Show();
-
-
+        MynewContact.ShowDialog();
     }
 
-    private void newContactToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (MynewContact == null || MynewContact.IsDisposed)
-        {
-            MynewContact = new NewContact(this)
-            {
-                MdiParent = this,
-                
-            };
-        }
-        MynewContact.Show();
-        MynewContact.BringToFront();
-        MynewContact.TopMost = true;
-        phoneBookDataGridView.SendToBack();
-    }
-
-    private void searchContactToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (MysearchContact == null || MysearchContact.IsDisposed)
-        {
-            MysearchContact = new SearchContact
-            {
-                MdiParent = this,
-            };
-        }
-
-        MysearchContact.Show();
-    }
-
-    public void EditContact(User user)
-    {
-        var editForm=new EditContactForm()
-            {SelectedContact = user};
-        editForm.Closed += EditForm_Closed;
-        editForm.MdiParent = this;
-        editForm.Show();
-    }
-
-    private void EditForm_Closed(object? sender, EventArgs e)
-    {
-        if (sender is EditContactForm editForm && editForm.IsSuccess)
-        {
-            RefreshContactDataGrid();
-        }
-    }
-
-    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        Application.Exit();
-    }
-
-    private ContactInformationForm? MYContactInformationForm { set; get; }
+    private ContactInformationForm? MyContactInformationForm { get; set; }
     private void phoneBookDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (e.RowIndex > 0)
+        if (e.RowIndex >= 0)
         {
-            var selectedUser =
+            var mainFormSelectedUser =
                 phoneBookDataGridView.Rows[e.RowIndex].DataBoundItem as User;
 
-            if (selectedUser != null)
-            {
-                var contactInformationForm = new ContactInformationForm(this)
-                {
-                    SelectedUser = selectedUser,
-                    MdiParent = this,
-                };
 
-                contactInformationForm.Show();
+            if (MyContactInformationForm == null || MyContactInformationForm.IsDisposed)
+            {
+                MyContactInformationForm = new ContactInformationForm(this, null)
+                {
+                    ContactInformationSelectedUser = mainFormSelectedUser,
+                };
             }
+            MyContactInformationForm.ShowDialog();
+
         }
     }
 
-    private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+    private void timer1_Tick(object sender, EventArgs e)
     {
-        RefreshContactDataGrid();
+        timePicker.Value = DateTime.Now;
+        timePicker.Enabled = true;
+        timePicker.Update();
+        timePicker.Refresh();
     }
+
+
 }

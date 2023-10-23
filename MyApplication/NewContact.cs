@@ -143,6 +143,7 @@ public partial class NewContact : System.Windows.Forms.Form
             databaseContext.Add(entity: newUser);
             databaseContext.SaveChanges();
             MessageBox.Show(text: "مخاطب اضافه گردید");
+            ResetForm();
             _mainForm.RefreshContactDataGrid();
             Close();
 
